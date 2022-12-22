@@ -75,8 +75,6 @@ const boxes = {
 		selectedLabelsArr.push(item.dataset.label);
 	})
 
-	console.log(selectedLabelsArr)
-
 	// ================
 
 	const hasPreffer = (item) => {
@@ -89,9 +87,97 @@ const boxes = {
 
 	const results = resultsArr.filter(hasPreffer)
 
-    results.map((item) => {
-      item.classList.remove('is-item-selected');
-    });
+	// ====
+
+	const secondFilter = (results , arr) =>  {
+		// console.log(results)
+		// console.log( 'passing labels arr to func ' + arr)
+
+		// console.log(arr)
+		// console.log(results)
+
+		// results jako zbiór do odznaczenia musi być przefiltrowany aby sprawdzić czy te elementy które
+		// powinny zostać odchaczone nie posiadają prefers z zaznaczonego arr
+
+		results.map((item) => {
+
+			// filter
+
+			
+			const newResults = []
+
+			
+			if(arr.length > 0) {
+
+			// TODO: iteracja po results , i jeżeli results[index].dataset.prefers.inlcudes(results[index])
+			// to nie odznaczaj , czyli nie usuwaj klasy
+
+
+			
+			
+
+			results.map((result , index) => {
+				if(result.dataset.prefers.includes(arr.toString())) {
+					newResults.push(result)
+				} else {
+					
+				}
+			
+			})
+			
+
+			console.log('new results==================')
+			console.log(newResults)
+			console.log('new results==================')
+
+
+			}
+
+			item.classList.remove('is-item-selected');
+
+			// następnie te dwa elementy w new results powinny zostac zaznaczone
+
+			newResults.map((item) => {
+				item.classList.add('is-item-selected')
+			})
+
+			// for (let index = 0; index < arr.length; index++) {
+			// 	const arrItem = arr[index];
+			// 	console.log(arrItem)
+
+			// 	if(item.dataset.prefers.includes(arrItem[index])) {
+			// 		item.classList.add('is-item-selected')
+			// 		item.classList.add('cant-remove-class-because-other-label-contains')
+			// 		console.log('zawiera')
+			// 	} else {
+			// 		item.classList.remove('is-item-selected');
+			// 		console.log('niezawiera')
+			// 	}
+				
+			// }
+
+			
+
+			// item.classList.remove('is-item-selected');
+
+			// console.log('arr==================')
+			// console.log(arr) // labelki zaznaczone
+			// console.log(arr.length)
+			// console.log(arr.toString());
+			// console.log('arr==================')
+
+			console.log('results==================')
+		    console.log(results) // elementy w tablicy
+			console.log('results==================')
+			
+			// console.log(item.dataset.prefers)
+			// item.classList.remove('is-item-selected');
+		  });
+	}
+	
+	secondFilter(results ,selectedLabelsArr);
+
+    
 
     
   },
