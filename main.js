@@ -45,9 +45,7 @@ const boxes = {
   UnfilterBoxes(filterBy , activeLabelsList , clicked) {
 
     const filter = filterBy;
-
 	const labels = document.querySelectorAll(`[data-label]`);
-	
     const items = document.querySelectorAll(
       `.filtered-items--wrapper [data-prefers]`
     );
@@ -55,25 +53,13 @@ const boxes = {
 	const labelsArr = [...labels]
     const resultsArr = [...items];
 
-    const hasPreffer = (item) => {
-      const itemPreffersList = item.dataset.prefers.split(',');
-
-      if (itemPreffersList.includes(filter)) {
-        return true;
-      }
-    };
-
 	const hasClass = (item) => {
 		const itemClassList = item.classList;
-		// console.log(itemClassList)
   
 		if (itemClassList.contains('is-label-active')) {
 		  return true;
 		}
 	  };
-
-    const results = resultsArr.filter(hasPreffer)
-
 
 	// przed drugim filtrem oznaczam labelke
 	this.removeActiveLabel(filterBy);
@@ -82,16 +68,26 @@ const boxes = {
 	// drugi filter
 
 	const selectedLabels = labelsArr.filter(hasClass);
-	// const step3 = results2.map((item) => {
-	// 	console.log('classlist ' + item.classList)
-	// })
-	console.log(selectedLabels)
 
-	// console.log(clicked.classList)
+	const selectedLabelsArr = [];
+	
+	const activeOtherFilters = selectedLabels.map((item) => {
+		selectedLabelsArr.push(item.dataset.label);
+	})
 
-    
+	console.log(selectedLabelsArr)
 
 	// ================
+
+	const hasPreffer = (item) => {
+		const itemPreffersList = item.dataset.prefers.split(',');
+  
+		if (itemPreffersList.includes(filter)) {
+		  return true;
+		}
+	  };
+
+	const results = resultsArr.filter(hasPreffer)
 
     results.map((item) => {
       item.classList.remove('is-item-selected');
