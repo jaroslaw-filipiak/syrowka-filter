@@ -64,11 +64,14 @@ const boxes = {
     const selectedLabels = labelsArr.filter(hasClass);
 
     const selectedLabelsArr = [];
-    console.log(selectedLabels);
 
     const activeOtherFilters = selectedLabels.map((item) => {
       selectedLabelsArr.push(item.dataset.label);
     });
+
+    console.log('selectedLabelsArr');
+    console.log(selectedLabelsArr);
+    console.log('selectedLabelsArr');
 
     const hasPreffer = (item) => {
       const itemPreffersList = item.dataset.prefers.split(',');
@@ -81,20 +84,41 @@ const boxes = {
     const results = resultsArr.filter(hasPreffer);
     const allPrefers = document.querySelectorAll(`[data-prefers]`);
     const allPrefersArr = [...allPrefers];
-    console.log(allPrefersArr);
+    console.log('allPrefersArr length // 7 default == all');
+    console.log(allPrefersArr.length);
+    console.log('allPrefersArr length');
+
+    console.log('results');
+    console.log(results);
+    console.log('results');
 
     const secondFilter = (results, arr) => {
+      // result to są ostatnie kliknięte elementy
+      //   TODO: coś tutaj jest nie tak w momencie gdy wiecej niż 3 labelki
       results.forEach((item) => {
         const newResults = [];
+
+        // console.log('arr.toString()');
+        // console.log(arr.toString());
+        // console.log('arr.toString()');
 
         if (arr.length > 0) {
           results.map((result, index) => {
             if (result.dataset.prefers.includes(arr.toString())) {
+              // result.dataset.prefers === listening,group,talking,understanding,personalization includes going,understanding
+              console.log('check');
+              console.log(result.dataset.prefers);
+              console.log(arr.toString());
+              console.log(' end check');
               newResults.push(result);
             } else {
             }
           });
         }
+
+        console.log('przefiltrowane: newResults');
+        console.log(newResults);
+        console.log('przefiltrowane: newResults');
 
         item.classList.remove('is-item-selected');
 
@@ -104,7 +128,7 @@ const boxes = {
       });
     };
 
-    secondFilter(allPrefersArr, selectedLabelsArr);
+    secondFilter(results, selectedLabelsArr);
   },
   setActiveLabel(cat) {
     const button = document.querySelector(`[data-label='${cat}']`);
